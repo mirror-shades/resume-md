@@ -23,6 +23,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
-		"@tailwindcss/vite": "^4.0.3"
+		"@tailwindcss/vite": "^4.0.3",
+		"marked": "^15.0.6"
 	}
 }
