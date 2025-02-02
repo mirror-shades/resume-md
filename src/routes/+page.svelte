@@ -3,11 +3,12 @@
     export let data;
 </script>
 
-<p class="text-3xl font-bold underline">Hello world!</p>
-
-<button
-  class="inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900">
-  Button
-</button>
+<div class="flex w-full">
+  <div class="card bg-base-300 rounded-box grid h-20 grow place-items-center">
+  git <textarea class="textarea" placeholder="Paste your Markdown text here" />
+  </div>
+  <div class="divider divider-horizontal">OR</div>
+  <div class="card bg-base-300 rounded-box grid h-20 grow place-items-center">content</div>
+</div>
 
 <slot />
