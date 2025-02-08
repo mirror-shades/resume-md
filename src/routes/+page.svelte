@@ -1,32 +1,30 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  // Import the internal directive (ensure the path is correct based on your project structure)
-  import DirectiveConfig from '$lib/directiveConfig';
+  import '../styles/app.css';
+  // Import the marked library for Markdown-to-HTML conversion.
+  import { marked } from 'marked';
+  
+  // Optionally, import GitHub Markdown CSS for styling the preview.
+  // Ensure the dependency is installed: npm install github-markdown-css
+  import 'github-markdown-css/github-markdown.css';
 
   // Declare reactive variables for the Markdown input and HTML output.
   let markdownInput = '';
   let htmlOutput = '';
 
-  // Conversion function: for demonstration, we'll convert newlines to <br> tags.
-  // Replace with your actual Markdown conversion logic or an internal conversion service if available.
+  // Conversion function using "marked" to parse Markdown and update the preview.
   function convertMarkdown() {
-    // Example: very basic replacement to demonstrate changes.
-    htmlOutput = markdownInput.replace(/\n/g, '<br>');
+    htmlOutput = marked.parse(markdownInput);
   }
-
-  // Initialize preview on component mount.
-  onMount(() => {
-    convertMarkdown();
-  });
 </script>
 
 <div class="h-screen">
-  <div class="flex ">
+  <div class="flex items-center p-4">
     <select class="select select-bordered w-full max-w-xs">
       <option>Github</option>
       <option>VSCode</option>
     </select>
-    <details class="dropdown">
+    <details class="dropdown ml-4">
       <summary class="btn m-1">Download</summary>
       <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
         <li><a>PDF</a></li>
@@ -44,13 +42,15 @@
         placeholder="Enter your Markdown here..."
       ></textarea>
     </div>
-
-    <div class="w-1/2 p-4">
+    <div class="w-1/2 p-4 overflow-auto">
       <h2 class="text-xl font-bold mb-4">Preview</h2>
-      <div
-        class="w-full h-full p-4 border rounded-lg bg-white"
-        use:DirectiveConfig={htmlOutput}
-      ></div>
+      <!-- 
+           The "markdown-body" class applies GitHub Markdown styling.
+           Ensure you've imported the GitHub Markdown CSS in your project.
+      -->
+      <div class="w-full h-full p-4 border rounded-lg bg-white markdown-body">
+        {@html htmlOutput}
+      </div>
     </div>
   </div>
 </div>
